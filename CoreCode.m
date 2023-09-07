@@ -1,7 +1,7 @@
 function tempPop=CoreCode(Pop_i,Archive,opt,adapter)
     global Global;
     tempPop=Pop_i;
-    %随机在存档中选择一个领导者个体
+    
     popDec=Pop_i.dec;
     popCost=Pop_i.obj';
     ArchCost=[Archive.obj]';
@@ -18,7 +18,7 @@ function tempPop=CoreCode(Pop_i,Archive,opt,adapter)
             newP=setdiff(1:Global.D,Pool);
             Pool=[Pool newP(TournamentSelection(Global.Wd(newP),ceil(rand()*Global.D/(Global.N*3))))];
             tempPop.dec=Pool(randperm(size(Pool,2),size(popDec,2)));
-        case 'stage2'   %高强度开发阶段
+        case 'stage2'  
             Pool=setdiff(Leader.dec,popDec);
             if size(Pool,2)==0
                 newP=setdiff(1:Global.D,Pool);
@@ -28,7 +28,7 @@ function tempPop=CoreCode(Pop_i,Archive,opt,adapter)
                 Pool=[Pool newP(TournamentSelection(Global.Wd(newP),2))];
             end
 
-            [~,opt_2]=max(tempPop.opt);%1是增加，2是替换，3是减少
+            [~,opt_2]=max(tempPop.opt);
             if size(popDec,2)<=numF
                 numF=size(unique(popDec),2);
             end
@@ -36,19 +36,19 @@ function tempPop=CoreCode(Pop_i,Archive,opt,adapter)
                 opt_2=randi([0 1],1)+1;
             end
 
-            if opt_2==1   % 增加特征
+            if opt_2==1  
                 %addF=Pool(TournamentSelection(Global.Wd(Pool),1));
                 addF=Pool(randperm(size(Pool,2),numF));
                 tempPop.dec=[tempPop.dec addF];
             end
-            if opt_2==2   %替换特征
+            if opt_2==2  
                 delF=popDec(TournamentSelection(1-Global.Wd(popDec),numF));
                 tempPop.dec=setdiff(tempPop.dec,delF);
                 %addF=Pool(TournamentSelection(Global.Wd(Pool),1));
                 addF=Pool(randperm(size(Pool,2),numF));
                 tempPop.dec=[tempPop.dec addF];
             end
-            if opt_2==3 %去除特征
+            if opt_2==3 
                 delF=popDec(TournamentSelection(1-Global.Wd(popDec),numF));
                 tempPop.dec=setdiff(tempPop.dec,delF);
             end
