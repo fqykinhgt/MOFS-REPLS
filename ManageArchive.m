@@ -1,8 +1,7 @@
 function Archive = ManageArchive(Archive,Population,opt)
-    %由于本文采用双存档，所以使用opt操作选择要管理的存档
     global Global;
     switch opt
-        case 'AccArchive'   %管理AccArchive存档
+        case 'AccArchive'  
             tempArchive=[Archive;Population];
             Archive=[];
             tempCost=[tempArchive.obj]';
@@ -15,12 +14,12 @@ function Archive = ManageArchive(Archive,Population,opt)
             end
 
             
-        case 'NdArchive'    %管理NdArchive存档
+        case 'NdArchive'   
             newPopulation=NDSort([Population;Archive]);
-            NDRank=[newPopulation.rank];%获取每个个体的非支配等级
+            NDRank=[newPopulation.rank];
             Archive=newPopulation(NDRank==1);
     end
-    if size(Archive,1)>Global.N %对存档进行管理
+    if size(Archive,1)>Global.N 
         while size(Archive,1)>Global.N
             tempCost=[Archive.obj]';
             idx=sort(tempCost(:,1));
