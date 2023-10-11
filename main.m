@@ -42,7 +42,7 @@ while gen<=maxGen
             tempARC=NdArchive;
         end
         for i_pop=1:Global.N
-            tempPop=CoreCode(Population(i_pop),tempARC,'stage1',gen/maxGen);
+            tempPop=CoreCode2(Population(i_pop),tempARC,'stage1',gen/maxGen);
             tempPop.obj=CalObj(tempPop.dec);
             Population(i_pop)=tempPop;
         end
@@ -58,7 +58,7 @@ while gen<=maxGen
         end
         for i_pop=1:Global.N
 
-            tempPop=CoreCode(Population(i_pop),NdArchive,'stage2',gen/maxGen);
+            tempPop=CoreCode2(Population(i_pop),NdArchive,'stage2',gen/maxGen);
             tempPop.obj=CalObj(tempPop.dec);
             TP=NDSort([Population(i_pop);tempPop]);
             if TP(1).rank>TP(2).rank
