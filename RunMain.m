@@ -39,7 +39,7 @@ for dataN=1:size(dataSetName,2)
                 Population=NDSort(Population);
                 if gen<=maxGen/4
                     for i_pop=1:Global.N
-                        tempPop=CoreCode(Population(i_pop),[AccArchive;NdArchive],'stage1');
+                        tempPop=CoreCode2(Population(i_pop),[AccArchive;NdArchive],'stage1');
                         tempPop.obj=CalObj(tempPop.dec);
                         Population(i_pop)=tempPop;
                     end
@@ -47,7 +47,7 @@ for dataN=1:size(dataSetName,2)
             
                 if gen>maxGen/4 && gen<=maxGen/2
                     for i_pop=1:Global.N
-                        tempPop=CoreCode(Population(i_pop),NdArchive,'stage2');
+                        tempPop=CoreCode2(Population(i_pop),NdArchive,'stage2');
                         tempPop.obj=CalObj(tempPop.dec);
                         Population(i_pop)=tempPop;
                     end
@@ -62,7 +62,7 @@ for dataN=1:size(dataSetName,2)
                         Population(Global.N/2+i)=NdArchive(thei);
                     end
                     for i_pop=1:Global.N
-                        tempPop=CoreCode(Population(i_pop),NdArchive,'stage3');
+                        tempPop=CoreCode2(Population(i_pop),NdArchive,'stage3');
                         tempPop.obj=CalObj(tempPop.dec);
                         Population(i_pop)=tempPop;
                     end
